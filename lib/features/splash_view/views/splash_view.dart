@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
+import 'package:my_tasks/core/utils/route_pages.dart';
 import 'package:my_tasks/features/splash_view/views/widgets/custom_button.dart';
 
 import 'widgets/welcome_text.dart';
@@ -21,7 +22,9 @@ class SplashView extends StatelessWidget {
             CustomButton(
               text: 'Get Start',
               width: MediaQuery.of(context).size.width * 0.7,
-              onPressed: () {},
+              onPressed: () {
+                Navigator.pushReplacementNamed(context, RoutePages.kHomeView);
+              },
             )
           ],
         ),
