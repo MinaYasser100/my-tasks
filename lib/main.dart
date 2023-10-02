@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:my_tasks/core/constant.dart';
+import 'package:my_tasks/features/splash_view/views/splash_view.dart';
 
 void main() {
   runApp(const MyTasks());
@@ -13,9 +15,11 @@ class MyTasks extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: ColorScheme.fromSeed(seedColor: kPrimaryColor),
         useMaterial3: true,
       ),
+      home: const SplashView(),
+      debugShowCheckedModeBanner: false,
     );
   }
 }
