@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_tasks/core/utils/constant.dart';
+import 'package:my_tasks/core/utils/route_pages.dart';
 import 'package:my_tasks/core/utils/styles.dart';
 
 class InitialHomeWidget extends StatelessWidget {
@@ -30,7 +31,9 @@ class InitialHomeWidget extends StatelessWidget {
               padding: const EdgeInsets.only(left: 10),
               child: IconButton(
                   padding: EdgeInsets.zero,
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pushNamed(context, RoutePages.kAllTasksTodayView);
+                  },
                   icon: const Icon(
                     Icons.list_alt_rounded,
                     color: kLightGrey,
