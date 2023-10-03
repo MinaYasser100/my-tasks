@@ -12,4 +12,8 @@ abstract class Styles {
     color: kLightGrey,
     fontWeight: FontWeight.bold,
   );
+  static const textStyle20 = TextStyle(
+    fontSize: 20.0,
+    fontWeight: FontWeight.bold,
+  );
 }
