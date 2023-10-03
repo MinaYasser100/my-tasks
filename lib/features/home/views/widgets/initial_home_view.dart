@@ -19,17 +19,32 @@ class InitialHomeWidget extends StatelessWidget {
           bottomRight: Radius.circular(25),
         ),
       ),
-      child: const Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+      child: Column(
         children: [
-          Text(
+          const SizedBox(
+            height: 35,
+          ),
+          Align(
+            alignment: Alignment.centerLeft,
+            child: Padding(
+              padding: const EdgeInsets.only(left: 10),
+              child: IconButton(
+                  padding: EdgeInsets.zero,
+                  onPressed: () {},
+                  icon: const Icon(
+                    Icons.list_alt_rounded,
+                    color: kLightGrey,
+                  )),
+            ),
+          ),
+          const Text(
             '27 Agu 2023',
             style: TextStyle(
               fontSize: 18,
               color: Color.fromARGB(255, 146, 146, 146),
             ),
           ),
-          Text(
+          const Text(
             'My Todo List',
             style: Styles.textStyle40,
           )
