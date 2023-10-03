@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_tasks/core/utils/route_pages.dart';
 import 'package:my_tasks/features/splash_view/views/widgets/custom_button.dart';
 import 'complete_title.dart';
 import 'done_tasks.dart';
@@ -30,8 +31,12 @@ class HomeViewBody extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.symmetric(vertical: 15),
           child: CustomButton(
-              text: 'Add New Task',
-              width: MediaQuery.of(context).size.width * 0.8),
+            text: 'Add New Task',
+            width: MediaQuery.of(context).size.width * 0.8,
+            onPressed: () {
+              Navigator.pushNamed(context, RoutePages.kAddNewTaskView);
+            },
+          ),
         )
       ],
     );

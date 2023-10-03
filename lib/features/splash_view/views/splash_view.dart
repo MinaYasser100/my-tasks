@@ -15,6 +15,9 @@ class SplashView extends StatelessWidget {
         child: Column(
           children: [
             const WelcomeText(),
+            const SizedBox(
+              height: 40.0,
+            ),
             Lottie.asset('assets/animation_ln8pat77.json'),
             const SizedBox(
               height: 30.0,
