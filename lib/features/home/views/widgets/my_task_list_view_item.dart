@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_tasks/core/utils/constant.dart';
 
 class MyTaskListViewItem extends StatelessWidget {
   const MyTaskListViewItem({
@@ -21,7 +22,10 @@ class MyTaskListViewItem extends StatelessWidget {
       trailing: IconButton(
         padding: EdgeInsets.zero,
         onPressed: () {},
-        icon: Icon(iconData),
+        icon: Icon(
+          iconData,
+          color: kPrimaryColor,
+        ),
       ),
     );
   }

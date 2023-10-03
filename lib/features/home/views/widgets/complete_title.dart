@@ -25,7 +25,7 @@ class CompleteTitle extends StatelessWidget {
           width: 5,
         ),
         Icon(
-          Icons.check_circle,
+          Icons.check_box,
           color: kPrimaryColor,
         )
       ],

@@ -22,7 +22,7 @@ class NotDoneTasks extends StatelessWidget {
         physics: const BouncingScrollPhysics(),
         itemBuilder: (context, index) {
           return const MyTaskListViewItem(
-            iconData: Icons.square_outlined,
+            iconData: Icons.crop_square_outlined,
           );
         },
         separatorBuilder: (context, index) {

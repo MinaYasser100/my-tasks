@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:my_tasks/core/utils/constant.dart';
 
+import 'custom_divider.dart';
+import 'my_task_list_view_item.dart';
+
 class DoneTasks extends StatelessWidget {
   const DoneTasks({
     super.key,
@@ -14,6 +17,19 @@ class DoneTasks extends StatelessWidget {
       decoration: const BoxDecoration(
         color: kSecondColor,
         borderRadius: BorderRadius.all(Radius.circular(20)),
+      ),
+      child: ListView.separated(
+        padding: EdgeInsets.zero,
+        physics: const BouncingScrollPhysics(),
+        itemBuilder: (context, index) {
+          return const MyTaskListViewItem(
+            iconData: Icons.check_box_rounded,
+          );
+        },
+        separatorBuilder: (context, index) {
+          return const CustomDivider();
+        },
+        itemCount: 6,
       ),
     );
   }
