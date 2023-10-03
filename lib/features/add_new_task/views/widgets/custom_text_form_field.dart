@@ -7,8 +7,10 @@ class CustomTextFomField extends StatelessWidget {
     super.key,
     required this.hintText,
     this.maxLiens = 1,
+    required this.textEditingController,
   });
   final String hintText;
+  final TextEditingController textEditingController;
   final int? maxLiens;
   @override
   Widget build(BuildContext context) {
