@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:my_tasks/core/utils/function/custom_app_bar.dart';
+import 'package:my_tasks/core/function/custom_app_bar.dart';
 import 'package:my_tasks/features/add_new_task/views/widgets/add_new_task_view_body.dart';
 
 class AddNewTaskView extends StatelessWidget {

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_tasks/core/utils/constant.dart';
+import 'package:my_tasks/core/utils/route_pages.dart';
 
 class AllTasksListViewItem extends StatelessWidget {
   const AllTasksListViewItem({
@@ -39,7 +40,15 @@ class AllTasksListViewItem extends StatelessWidget {
                 ),
               ),
               IconButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.pushNamed(context, RoutePages.kEditTaskView,
+                      arguments: {
+                        'taskTitle': 'taskTitle',
+                        'taskDate': 'taskDate',
+                        'taskTime': 'taskTime',
+                        'task': 'task',
+                      });
+                },
                 icon: const Icon(
                   Icons.edit_outlined,
                   color: kPrimaryColor,
