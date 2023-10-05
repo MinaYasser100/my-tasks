@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:my_tasks/core/utils/constant.dart';
 
 class AllTasksDateToday extends StatelessWidget {
@@ -8,6 +9,8 @@ class AllTasksDateToday extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    DateTime currentDate = DateTime.now();
+    String formattedDate = DateFormat('EE, MMM d, y').format(currentDate);
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 3),
       decoration: const BoxDecoration(
@@ -15,9 +18,9 @@ class AllTasksDateToday extends StatelessWidget {
             bottomLeft: Radius.circular(20), bottomRight: Radius.circular(20)),
         color: kPrimaryColor,
       ),
-      child: const Text(
-        'Oct,2,2023',
-        style: TextStyle(
+      child: Text(
+        formattedDate.toString(),
+        style: const TextStyle(
           color: kLightGrey,
           fontSize: 20,
         ),

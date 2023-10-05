@@ -44,7 +44,6 @@ class _EditTaskViewBodyState extends State<EditTaskViewBody> {
 
   @override
   Widget build(BuildContext context) {
-    print(taskController.text);
     return Padding(
       padding: const EdgeInsets.only(right: 20.0, left: 20.0, top: 30),
       child: SingleChildScrollView(

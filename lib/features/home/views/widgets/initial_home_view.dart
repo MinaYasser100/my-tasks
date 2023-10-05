@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:my_tasks/core/utils/constant.dart';
 import 'package:my_tasks/core/utils/route_pages.dart';
 import 'package:my_tasks/core/utils/styles.dart';
+import 'package:intl/intl.dart';
 
 class InitialHomeWidget extends StatelessWidget {
   const InitialHomeWidget({
@@ -10,6 +11,8 @@ class InitialHomeWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    DateTime currentDate = DateTime.now();
+    String formattedDate = DateFormat('EE, MMM d, y').format(currentDate);
     return Container(
       height: MediaQuery.of(context).size.height * 0.30,
       width: double.infinity,
@@ -40,9 +43,9 @@ class InitialHomeWidget extends StatelessWidget {
                   )),
             ),
           ),
-          const Text(
-            '27 Agu 2023',
-            style: TextStyle(
+          Text(
+            formattedDate.toString(),
+            style: const TextStyle(
               fontSize: 18,
               color: Color.fromARGB(255, 146, 146, 146),
             ),
