@@ -11,7 +11,7 @@ class EditTaskView extends StatelessWidget {
     return Scaffold(
       appBar: customAppBar(title: 'Edit Task'),
       body: EditTaskViewBody(
-        taskTitel: 'taskTitle',
+        taskTitel: argu['taskTitle'],
         taskDate: argu['taskDate'],
         taskTime: argu['taskTime'],
         task: argu['task'],

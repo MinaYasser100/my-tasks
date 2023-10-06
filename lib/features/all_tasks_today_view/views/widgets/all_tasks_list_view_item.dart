@@ -5,7 +5,9 @@ import 'package:my_tasks/core/utils/route_pages.dart';
 class AllTasksListViewItem extends StatelessWidget {
   const AllTasksListViewItem({
     super.key,
+    required this.dayTask,
   });
+  final Map<String, Object?> dayTask;
 
   @override
   Widget build(BuildContext context) {
@@ -15,16 +17,16 @@ class AllTasksListViewItem extends StatelessWidget {
         borderRadius: BorderRadius.circular(20),
       ),
       child: ListTile(
-        title: const Text(
-          'Task title',
-          style: TextStyle(
+        title: Text(
+          dayTask["title"].toString(),
+          style: const TextStyle(
             fontSize: 18.0,
             color: kPrimaryColor,
             fontWeight: FontWeight.bold,
           ),
         ),
-        subtitle: const Text(
-          'this is the task body in the list tile in text widget',
+        subtitle: Text(
+          dayTask["task"].toString(),
           maxLines: 2,
           overflow: TextOverflow.ellipsis,
         ),
@@ -43,10 +45,10 @@ class AllTasksListViewItem extends StatelessWidget {
                 onPressed: () {
                   Navigator.pushNamed(context, RoutePages.kEditTaskView,
                       arguments: {
-                        'taskTitle': 'taskTitle',
-                        'taskDate': 'taskDate',
-                        'taskTime': 'taskTime',
-                        'task': 'task',
+                        'taskTitle': dayTask["title"].toString(),
+                        'taskDate': dayTask["date"].toString(),
+                        'taskTime': dayTask["time"].toString(),
+                        'task': dayTask["task"].toString(),
                       });
                 },
                 icon: const Icon(
