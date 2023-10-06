@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_tasks/core/repo/sqflite_repo_impl.dart';
 import 'package:my_tasks/core/utils/constant.dart';
 import 'package:my_tasks/core/utils/route_pages.dart';
 
@@ -19,6 +20,8 @@ class _AllTasksListViewItemState extends State<AllTasksListViewItem> {
     setState(() {});
     super.initState();
   }
+
+  SqfliteRepoImpl sql = SqfliteRepoImpl();
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +49,13 @@ class _AllTasksListViewItemState extends State<AllTasksListViewItem> {
           child: Row(
             children: [
               IconButton(
-                onPressed: () {},
+                onPressed: () async {
+                  Navigator.pushReplacementNamed(
+                      context, RoutePages.kAllTasksTodayView);
+                  await sql.deletDatabaseItem(
+                      table: "tasks",
+                      whereData: "id = ${widget.dayTask["id"]}");
+                },
                 icon: const Icon(
                   Icons.delete,
                   color: Color.fromARGB(255, 191, 85, 78),
