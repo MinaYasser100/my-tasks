@@ -15,6 +15,7 @@ class EditTaskView extends StatelessWidget {
         taskDate: argu['taskDate'],
         taskTime: argu['taskTime'],
         task: argu['task'],
+        taskId: argu['id'],
       ),
     );
   }

@@ -2,12 +2,23 @@ import 'package:flutter/material.dart';
 import 'package:my_tasks/core/utils/constant.dart';
 import 'package:my_tasks/core/utils/route_pages.dart';
 
-class AllTasksListViewItem extends StatelessWidget {
+class AllTasksListViewItem extends StatefulWidget {
   const AllTasksListViewItem({
     super.key,
     required this.dayTask,
   });
   final Map<String, Object?> dayTask;
+
+  @override
+  State<AllTasksListViewItem> createState() => _AllTasksListViewItemState();
+}
+
+class _AllTasksListViewItemState extends State<AllTasksListViewItem> {
+  @override
+  void initState() {
+    setState(() {});
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +29,7 @@ class AllTasksListViewItem extends StatelessWidget {
       ),
       child: ListTile(
         title: Text(
-          dayTask["title"].toString(),
+          widget.dayTask["title"].toString(),
           style: const TextStyle(
             fontSize: 18.0,
             color: kPrimaryColor,
@@ -26,7 +37,7 @@ class AllTasksListViewItem extends StatelessWidget {
           ),
         ),
         subtitle: Text(
-          dayTask["task"].toString(),
+          widget.dayTask["task"].toString(),
           maxLines: 2,
           overflow: TextOverflow.ellipsis,
         ),
@@ -45,10 +56,11 @@ class AllTasksListViewItem extends StatelessWidget {
                 onPressed: () {
                   Navigator.pushNamed(context, RoutePages.kEditTaskView,
                       arguments: {
-                        'taskTitle': dayTask["title"].toString(),
-                        'taskDate': dayTask["date"].toString(),
-                        'taskTime': dayTask["time"].toString(),
-                        'task': dayTask["task"].toString(),
+                        'taskTitle': widget.dayTask["title"].toString(),
+                        'taskDate': widget.dayTask["date"].toString(),
+                        'taskTime': widget.dayTask["time"].toString(),
+                        'task': widget.dayTask["task"].toString(),
+                        'id': widget.dayTask["id"].toString(),
                       });
                 },
                 icon: const Icon(

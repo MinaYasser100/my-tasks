@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:my_tasks/core/function/select_date.dart';
-import 'package:my_tasks/core/function/select_time.dart';
-import 'package:my_tasks/core/utils/styles.dart';
-import 'package:my_tasks/features/add_new_task/views/widgets/custom_text_form_field.dart';
+import 'package:my_tasks/core/repo/sqflite_repo_impl.dart';
+import 'package:my_tasks/core/utils/route_pages.dart';
 import 'package:my_tasks/features/splash_view/views/widgets/custom_button.dart';
+import 'texts_field_from_edit_task.dart';
 
 class EditTaskViewBody extends StatefulWidget {
   const EditTaskViewBody(
@@ -11,11 +10,13 @@ class EditTaskViewBody extends StatefulWidget {
       required this.taskTitel,
       required this.taskDate,
       required this.taskTime,
-      required this.task});
+      required this.task,
+      required this.taskId});
   final String taskTitel;
   final String taskDate;
   final String taskTime;
   final String task;
+  final String taskId;
   @override
   State<EditTaskViewBody> createState() => _EditTaskViewBodyState();
 }
@@ -26,6 +27,7 @@ class _EditTaskViewBodyState extends State<EditTaskViewBody> {
   TextEditingController taskTimeController = TextEditingController();
   TextEditingController taskController = TextEditingController();
   GlobalKey<FormState> formkey = GlobalKey();
+  SqfliteRepoImpl sql = SqfliteRepoImpl();
   @override
   void initState() {
     taskController.text = widget.task;
@@ -54,76 +56,28 @@ class _EditTaskViewBodyState extends State<EditTaskViewBody> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
-                'Task Title',
-                style: Styles.textStyle20,
-              ),
-              const SizedBox(height: 5.0),
-              CustomTextFomField(
-                hintText: 'Task Title',
-                textEditingController: taskTitleController,
-              ),
-              const SizedBox(height: 30),
-              Row(
-                children: [
-                  Expanded(
-                      child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const Text(
-                        'Date',
-                        style: Styles.textStyle20,
-                      ),
-                      const SizedBox(height: 5),
-                      CustomTextFomField(
-                        hintText: 'MM/dd/yyyy',
-                        textEditingController: taskDateController,
-                        onTap: () {
-                          selectDate(context, taskDateController);
-                        },
-                      ),
-                    ],
-                  )),
-                  const SizedBox(width: 10),
-                  Expanded(
-                      child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const Text(
-                        'Time',
-                        style: Styles.textStyle20,
-                      ),
-                      const SizedBox(height: 5),
-                      CustomTextFomField(
-                        hintText: 'hh:mm',
-                        textEditingController: taskTimeController,
-                        onTap: () {
-                          selectTime(
-                            context: context,
-                            timeController: taskTimeController,
-                          );
-                        },
-                      ),
-                    ],
-                  )),
-                ],
-              ),
-              const SizedBox(height: 40),
-              const Text(
-                'Task',
-                style: Styles.textStyle20,
-              ),
-              const SizedBox(height: 5),
-              CustomTextFomField(
-                hintText: 'Task',
-                textEditingController: taskController,
-                maxLiens: 6,
-              ),
-              const SizedBox(height: 40),
+              TextsFieldFormEditTask(
+                  taskTitleController: taskTitleController,
+                  taskDateController: taskDateController,
+                  taskTimeController: taskTimeController,
+                  taskController: taskController),
               CustomButton(
                 text: 'Save',
                 width: MediaQuery.of(context).size.width * 0.9,
-                onPressed: () {},
+                onPressed: () async {
+                  Navigator.pushReplacementNamed(
+                      context, RoutePages.kAllTasksTodayView);
+                  await sql.updateDatabaseItem(
+                    table: "tasks",
+                    values: {
+                      "title": taskTitleController.text,
+                      "task": taskController.text,
+                      "time": taskTimeController.text.toString(),
+                      "date": taskDateController.text.toString(),
+                    },
+                    whereData: "id = ${widget.taskId}",
+                  );
+                },
               )
             ],
           ),
