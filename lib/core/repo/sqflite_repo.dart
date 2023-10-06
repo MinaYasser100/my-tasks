@@ -1,8 +1,11 @@
 abstract class SqfliteRepo {
   initialDatabase();
-  readDatabase({String table});
-  insertDatabaseItem({String table, Map<String, Object?> values});
+  readDatabase({required String table});
+  insertDatabaseItem(
+      {required String table, required Map<String, Object?> values});
   updateDatabaseItem(
-      {String table, Map<String, Object?> values, String whereData});
-  deletDatabaseItem({String table, String whereData});
+      {required String table,
+      required Map<String, Object?> values,
+      required String whereData});
+  deletDatabaseItem({required String table, required String whereData});
 }
