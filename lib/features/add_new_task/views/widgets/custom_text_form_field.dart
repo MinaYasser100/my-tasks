@@ -8,10 +8,12 @@ class CustomTextFomField extends StatelessWidget {
     this.hintText,
     this.maxLiens = 1,
     required this.textEditingController,
+    this.onTap,
   });
   final String? hintText;
   final TextEditingController textEditingController;
   final int? maxLiens;
+  final void Function()? onTap;
   @override
   Widget build(BuildContext context) {
     return TextFormField(
@@ -24,6 +26,7 @@ class CustomTextFomField extends StatelessWidget {
         enabledBorder: customOutlineInputBorder(),
         focusedBorder: customOutlineInputBorder(),
       ),
+      onTap: onTap,
     );
   }
 }

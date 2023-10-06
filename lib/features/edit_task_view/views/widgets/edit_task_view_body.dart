@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:my_tasks/core/function/select_date.dart';
+import 'package:my_tasks/core/function/select_time.dart';
 import 'package:my_tasks/core/utils/styles.dart';
 import 'package:my_tasks/features/add_new_task/views/widgets/custom_text_form_field.dart';
 import 'package:my_tasks/features/splash_view/views/widgets/custom_button.dart';
@@ -74,8 +76,12 @@ class _EditTaskViewBodyState extends State<EditTaskViewBody> {
                       ),
                       const SizedBox(height: 5),
                       CustomTextFomField(
-                          hintText: 'Aug,27,2023',
-                          textEditingController: taskDateController),
+                        hintText: 'MM/dd/yyyy',
+                        textEditingController: taskDateController,
+                        onTap: () {
+                          selectDate(context, taskDateController);
+                        },
+                      ),
                     ],
                   )),
                   const SizedBox(width: 10),
@@ -89,8 +95,15 @@ class _EditTaskViewBodyState extends State<EditTaskViewBody> {
                       ),
                       const SizedBox(height: 5),
                       CustomTextFomField(
-                          hintText: '10:50',
-                          textEditingController: taskTimeController),
+                        hintText: 'hh:mm',
+                        textEditingController: taskTimeController,
+                        onTap: () {
+                          selectTime(
+                            context: context,
+                            timeController: taskTimeController,
+                          );
+                        },
+                      ),
                     ],
                   )),
                 ],
