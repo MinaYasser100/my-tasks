@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:my_tasks/core/function/select_date.dart';
-import 'package:my_tasks/core/function/select_time.dart';
+import 'package:my_tasks/core/repo/sqflite_repo_impl.dart';
 import 'package:my_tasks/core/utils/styles.dart';
 import 'package:my_tasks/features/splash_view/views/widgets/custom_button.dart';
 import 'custom_text_form_field.dart';
+import 'date_and_time_row.dart';
 
 class AddNewTaskViewBody extends StatefulWidget {
   const AddNewTaskViewBody({super.key});
@@ -18,6 +18,7 @@ class _AddNewTaskViewBodyState extends State<AddNewTaskViewBody> {
   TextEditingController taskTimeController = TextEditingController();
   TextEditingController taskController = TextEditingController();
   GlobalKey<FormState> formKey = GlobalKey();
+  SqfliteRepoImpl sql = SqfliteRepoImpl();
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -38,49 +39,9 @@ class _AddNewTaskViewBodyState extends State<AddNewTaskViewBody> {
                 textEditingController: taskTitleController,
               ),
               const SizedBox(height: 30),
-              Row(
-                children: [
-                  Expanded(
-                      child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const Text(
-                        'Date',
-                        style: Styles.textStyle20,
-                      ),
-                      const SizedBox(height: 5),
-                      CustomTextFomField(
-                        hintText: 'MM/dd/yyyy',
-                        textEditingController: taskDateController,
-                        onTap: () {
-                          selectDate(context, taskDateController);
-                        },
-                      ),
-                    ],
-                  )),
-                  const SizedBox(width: 10),
-                  Expanded(
-                      child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const Text(
-                        'Time',
-                        style: Styles.textStyle20,
-                      ),
-                      const SizedBox(height: 5),
-                      CustomTextFomField(
-                        hintText: 'hh:mm',
-                        textEditingController: taskTimeController,
-                        onTap: () {
-                          selectTime(
-                            context: context,
-                            timeController: taskTimeController,
-                          );
-                        },
-                      ),
-                    ],
-                  )),
-                ],
+              DateAndTimeRow(
+                taskDateController: taskDateController,
+                taskTimeController: taskTimeController,
               ),
               const SizedBox(height: 40),
               const Text(
@@ -97,7 +58,18 @@ class _AddNewTaskViewBodyState extends State<AddNewTaskViewBody> {
               CustomButton(
                 text: 'Save',
                 width: MediaQuery.of(context).size.width * 0.9,
-                onPressed: () {},
+                onPressed: () async {
+                  Navigator.pop(context);
+                  int process =
+                      await sql.insertDatabaseItem(table: "tasks", values: {
+                    "title": taskTitleController.text,
+                    "task": taskController.text,
+                    "time": taskTimeController.text.toString(),
+                    "date": taskDateController.text.toString(),
+                    "done": 0,
+                  });
+                  print(process);
+                },
               )
             ],
           ),
