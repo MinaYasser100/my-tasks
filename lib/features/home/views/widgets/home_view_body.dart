@@ -18,9 +18,11 @@ class HomeViewBody extends StatefulWidget {
 class _HomeViewBodyState extends State<HomeViewBody> {
   final SqfliteRepoImpl sql = SqfliteRepoImpl();
   List<Map<String, Object?>> notDoneTasks = [];
+  List<Map<String, Object?>> doneTasks = [];
   @override
   void initState() {
     readNotDoneTasks();
+    readDoneTasks();
     super.initState();
   }
 
@@ -45,7 +47,10 @@ class _HomeViewBodyState extends State<HomeViewBody> {
           ),
         ),
         const CompleteTitle(),
-        const DoneTasks(),
+        DoneTasks(
+          doneTasks: doneTasks,
+          sql: sql,
+        ),
         Padding(
           padding: const EdgeInsets.symmetric(vertical: 15),
           child: CustomButton(
@@ -73,6 +78,23 @@ class _HomeViewBodyState extends State<HomeViewBody> {
       String formattedDate = DateFormat('MM/dd/yyyy').format(currentDate);
       if (element["done"] == 0 && formattedDate == element['date']) {
         notDoneTasks.add(element);
+      }
+    }
+  }
+
+  readDoneTasks() async {
+    List<Map<String, Object?>> response =
+        await sql.readDatabase(table: "tasks");
+    selectDoneTasks(response);
+    setState(() {});
+  }
+
+  void selectDoneTasks(List<Map<String, Object?>> response) {
+    for (var element in response) {
+      DateTime currentDate = DateTime.now();
+      String formattedDate = DateFormat('MM/dd/yyyy').format(currentDate);
+      if (element["done"] == 1 && formattedDate == element['date']) {
+        doneTasks.add(element);
       }
     }
   }
