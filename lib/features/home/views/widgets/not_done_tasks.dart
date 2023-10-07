@@ -28,7 +28,9 @@ class NotDoneTasks extends StatelessWidget {
           return NotDoneTasksListView(notDoneTasks: notDoneTasks, sql: sql);
         },
         fallback: (context) {
-          return const NoTasks();
+          return const NoTasks(
+            text: 'No Tasks In This Day',
+          );
         },
       ),
     );
