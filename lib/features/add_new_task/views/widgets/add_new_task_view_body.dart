@@ -60,15 +60,13 @@ class _AddNewTaskViewBodyState extends State<AddNewTaskViewBody> {
                 width: MediaQuery.of(context).size.width * 0.9,
                 onPressed: () async {
                   Navigator.pop(context);
-                  int process =
-                      await sql.insertDatabaseItem(table: "tasks", values: {
+                  await sql.insertDatabaseItem(table: "tasks", values: {
                     "title": taskTitleController.text,
                     "task": taskController.text,
                     "time": taskTimeController.text.toString(),
                     "date": taskDateController.text.toString(),
                     "done": 0,
                   });
-                  print(process);
                 },
               )
             ],

@@ -5,23 +5,27 @@ class MyTaskListViewItem extends StatelessWidget {
   const MyTaskListViewItem({
     super.key,
     required this.iconData,
+    required this.notDonetask,
+    this.onPressedDone,
   });
   final IconData iconData;
+  final Map<String, Object?> notDonetask;
+  final void Function()? onPressedDone;
 
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      title: const Text(
-        'Title item',
+      title: Text(
+        notDonetask["title"].toString(),
         maxLines: 1,
         overflow: TextOverflow.ellipsis,
       ),
-      subtitle: const Text(
-        '10:50 AM',
+      subtitle: Text(
+        notDonetask["time"].toString(),
       ),
       trailing: IconButton(
         padding: EdgeInsets.zero,
-        onPressed: () {},
+        onPressed: onPressedDone,
         icon: Icon(
           iconData,
           color: kPrimaryColor,

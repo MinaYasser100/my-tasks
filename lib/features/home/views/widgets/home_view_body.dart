@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:my_tasks/core/repo/sqflite_repo_impl.dart';
 import 'package:my_tasks/core/utils/route_pages.dart';
 import 'package:my_tasks/features/splash_view/views/widgets/custom_button.dart';
 import 'complete_title.dart';
@@ -6,8 +8,21 @@ import 'done_tasks.dart';
 import 'initial_home_view.dart';
 import 'not_done_tasks.dart';
 
-class HomeViewBody extends StatelessWidget {
+class HomeViewBody extends StatefulWidget {
   const HomeViewBody({super.key});
+
+  @override
+  State<HomeViewBody> createState() => _HomeViewBodyState();
+}
+
+class _HomeViewBodyState extends State<HomeViewBody> {
+  final SqfliteRepoImpl sql = SqfliteRepoImpl();
+  List<Map<String, Object?>> notDoneTasks = [];
+  @override
+  void initState() {
+    readNotDoneTasks();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -15,14 +30,17 @@ class HomeViewBody extends StatelessWidget {
       children: [
         SizedBox(
           height: MediaQuery.of(context).size.height * 0.53,
-          child: const Stack(
+          child: Stack(
             alignment: Alignment.bottomCenter,
             children: [
-              Align(
+              const Align(
                 alignment: Alignment.topCenter,
                 child: InitialHomeWidget(),
               ),
-              NotDoneTasks(),
+              NotDoneTasks(
+                notDoneTasks: notDoneTasks,
+                sql: sql,
+              ),
             ],
           ),
         ),
@@ -40,5 +58,22 @@ class HomeViewBody extends StatelessWidget {
         )
       ],
     );
+  }
+
+  readNotDoneTasks() async {
+    List<Map<String, Object?>> response =
+        await sql.readDatabase(table: "tasks");
+    selectNotDoneTasks(response);
+    setState(() {});
+  }
+
+  void selectNotDoneTasks(List<Map<String, Object?>> response) {
+    for (var element in response) {
+      DateTime currentDate = DateTime.now();
+      String formattedDate = DateFormat('MM/dd/yyyy').format(currentDate);
+      if (element["done"] == 0 && formattedDate == element['date']) {
+        notDoneTasks.add(element);
+      }
+    }
   }
 }

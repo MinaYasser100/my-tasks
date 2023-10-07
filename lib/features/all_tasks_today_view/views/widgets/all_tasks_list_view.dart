@@ -23,7 +23,6 @@ class _AllTasksListViewState extends State<AllTasksListView> {
 
   @override
   Widget build(BuildContext context) {
-    print(allDayTasks);
     return ListView.separated(
         itemBuilder: (context, index) {
           return AllTasksListViewItem(
@@ -41,7 +40,6 @@ class _AllTasksListViewState extends State<AllTasksListView> {
     List<Map<String, Object?>> response =
         await sql.readDatabase(table: 'tasks');
     tasks.addAll(response);
-    print(response);
     selectDayTasks(tasks);
     if (mounted) {
       setState(() {});

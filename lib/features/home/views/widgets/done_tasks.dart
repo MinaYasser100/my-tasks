@@ -22,9 +22,10 @@ class DoneTasks extends StatelessWidget {
         padding: EdgeInsets.zero,
         physics: const BouncingScrollPhysics(),
         itemBuilder: (context, index) {
-          return const MyTaskListViewItem(
-            iconData: Icons.check_box_rounded,
-          );
+          // return const MyTaskListViewItem(
+          //   iconData: Icons.check_box_rounded,
+          //   notDonetask: null,
+          // );
         },
         separatorBuilder: (context, index) {
           return const CustomDivider();
