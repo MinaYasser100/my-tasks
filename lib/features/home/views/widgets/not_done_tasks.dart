@@ -29,7 +29,7 @@ class NotDoneTasks extends StatelessWidget {
         },
         fallback: (context) {
           return const NoTasks(
-            text: 'No Tasks In This Day',
+            text: 'No Tasks Yet',
           );
         },
       ),
