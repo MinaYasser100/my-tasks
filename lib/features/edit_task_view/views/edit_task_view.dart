@@ -9,7 +9,12 @@ class EditTaskView extends StatelessWidget {
     final argu =
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
     return Scaffold(
-      appBar: customAppBar(title: 'Edit Task'),
+      appBar: customAppBar(
+        title: 'Edit Task',
+        onPressed: () {
+          Navigator.pop(context);
+        },
+      ),
       body: EditTaskViewBody(
         taskTitel: argu['taskTitle'],
         taskDate: argu['taskDate'],

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_tasks/core/repo/sqflite_repo_impl.dart';
+import 'package:my_tasks/core/utils/route_pages.dart';
 import 'package:my_tasks/core/utils/styles.dart';
 import 'package:my_tasks/features/splash_view/views/widgets/custom_button.dart';
 import 'custom_text_form_field.dart';
@@ -59,7 +60,7 @@ class _AddNewTaskViewBodyState extends State<AddNewTaskViewBody> {
                 text: 'Save',
                 width: MediaQuery.of(context).size.width * 0.9,
                 onPressed: () async {
-                  Navigator.pop(context);
+                  Navigator.pushReplacementNamed(context, RoutePages.kHomeView);
                   await sql.insertDatabaseItem(table: "tasks", values: {
                     "title": taskTitleController.text,
                     "task": taskController.text,
