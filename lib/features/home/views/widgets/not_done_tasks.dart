@@ -1,9 +1,9 @@
+import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
-import 'package:my_tasks/core/function/change_task_state.dart';
 import 'package:my_tasks/core/repo/sqflite_repo_impl.dart';
 import 'package:my_tasks/core/utils/constant.dart';
-import 'custom_divider.dart';
-import 'my_task_list_view_item.dart';
+import 'no_tasks.dart';
+import 'not_done_tasks_list_view.dart';
 
 class NotDoneTasks extends StatelessWidget {
   const NotDoneTasks({
@@ -22,26 +22,14 @@ class NotDoneTasks extends StatelessWidget {
         color: kSecondColor,
         borderRadius: BorderRadius.all(Radius.circular(20)),
       ),
-      child: ListView.separated(
-        padding: EdgeInsets.zero,
-        physics: const BouncingScrollPhysics(),
-        itemBuilder: (context, index) {
-          return MyTaskListViewItem(
-            iconData: Icons.crop_square_outlined,
-            task: notDoneTasks[index],
-            onPressed: () async {
-              await changeTaskState(
-                  context: context,
-                  id: '${notDoneTasks[index]['id']}',
-                  sql: sql,
-                  state: 1);
-            },
-          );
+      child: ConditionalBuilder(
+        condition: notDoneTasks.isNotEmpty,
+        builder: (context) {
+          return NotDoneTasksListView(notDoneTasks: notDoneTasks, sql: sql);
         },
-        separatorBuilder: (context, index) {
-          return const CustomDivider();
+        fallback: (context) {
+          return const NoTasks();
         },
-        itemCount: notDoneTasks.length,
       ),
     );
   }
